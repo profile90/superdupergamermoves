@@ -10,7 +10,7 @@ void setup() {
 
   size(1280, 720, P3D);
   background(0);
-  frameRate(10);
+  frameRate(30);
   network = new NetworkClient(new Client(this, "127.0.0.1", 10002));
 
   client_player = new Player(true);

@@ -22,14 +22,14 @@ class NetworkServer {
   }
   
   void sendServerState() {
-    server.write(ball.x + "," + ball.y + "," + server_player.y  + "," + server_player.score + "," + client_player.score + ";"); 
+    server.write(ball.x + "," + ball.y + "," + serverPlayer.y  + "," + serverPlayer.score + "," + clientPlayer.score + ";"); 
   }
   
   void clientScored() {
-    client_player.score++;
+    clientPlayer.score++;
   }
   void server_scored() {
-    server_player.score++;
+    serverPlayer.score++;
   }
 
   
@@ -48,7 +48,7 @@ class NetworkServer {
   
   private void updateGameState(float[] data) {
     
-    client_player.update(data[CLIENT_Y]);
+    clientPlayer.update(data[CLIENT_Y]);
   }
    
 

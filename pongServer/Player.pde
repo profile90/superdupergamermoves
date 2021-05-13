@@ -4,6 +4,7 @@ class Player {
 
   float x, y; 
   float y_off;
+  float x_off;
   boolean client;
   int score = 0;
  
@@ -17,7 +18,8 @@ class Player {
       x += width/2;    
     }    
 
-    y_off = 120; 
+    y_off = 120;
+    x_off = 5;
     y = height/2 - (y_off / 2);    
    
   }

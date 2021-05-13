@@ -3,8 +3,8 @@ import processing.net.*;
 int port = 10002;       
 
 
-Player client_player;
-Player server_player;
+Player clientPlayer;
+Player serverPlayer;
 
 Ball ball;
 NetworkServer network; 
@@ -14,11 +14,11 @@ void setup()
 {
   size(1280, 720, P3D);
   background(0);
-  frameRate(10);
+  frameRate(30);
   Server server = new Server(this, port);
 
-  client_player = new Player(true);
-  server_player = new Player(false);
+  clientPlayer = new Player(true);
+  serverPlayer = new Player(false);
   ball = new Ball();
   network = new NetworkServer(server);
 
@@ -28,11 +28,16 @@ void setup()
 
 void draw()
 {
+  
+  ball.move();
+  
+  ball.hasHit(serverPlayer, clientPlayer);
+  
   background(0);
-  client_player.draw();
-  server_player.draw();
-
-  server_player.update(mouseY);
+  clientPlayer.draw();
+  serverPlayer.draw();
+  ball.draw();
+  serverPlayer.update(mouseY);
 
 
   network.getNextMessage();
