@@ -1,19 +1,10 @@
 
-
-
-
-/*
-  Expects: 
-  
-  client_x,client_y;
-
-
-*/
-
 class NetworkServer {
 
   int messageNumber = 0;
   final int CLIENT_Y = 0;
+  int state;
+  
   Server server;
   Client client;
   
@@ -25,13 +16,13 @@ class NetworkServer {
     server.write(ball.x + "," + ball.y + "," + serverPlayer.y  + "," + serverPlayer.score + "," + clientPlayer.score + ";"); 
   }
   
-  void clientScored() {
-    clientPlayer.score++;
+  void nextState() {
+    state++;    
+    if(this.state >= 3) {
+       state = 0;
+    }    
   }
-  void server_scored() {
-    serverPlayer.score++;
-  }
-
+  
   
   void getNextMessage() {
     client = server.available();
@@ -44,10 +35,15 @@ class NetworkServer {
   float[] decodeGameState(String gamestate) {
     return float(split(gamestate, ',')); 
   }
+
+  void drawScore() {
+    textSize(32);
+    textAlign(CENTER);
+    text(serverPlayer.score + ":" + clientPlayer.score, width/2, height/2);
+  }
   
   
   private void updateGameState(float[] data) {
-    
     clientPlayer.update(data[CLIENT_Y]);
   }
    

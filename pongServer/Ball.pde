@@ -7,6 +7,8 @@ class Ball {
   float speed;
   
   
+ 
+  
   PVector position;
   PVector velocity;
 
@@ -30,19 +32,18 @@ class Ball {
 
   
   void move() {
-
-    
     
     if(position.x + radius > width || (position.x + radius < 0)) {
-       if(position.x < width/2) {
+       if(position.x < width/2) 
+       {
+         
          clientPlayer.score++;
        }
        else
        {
          serverPlayer.score++;
        }
-       
-       println(serverPlayer.score +":" + clientPlayer.score); 
+       ball.position.set(width/2, height/2);
        velocity.x *= -1;
     }
     
@@ -56,7 +57,19 @@ class Ball {
     this.y = position.y;
     
   }
-
+  
+  void draw3() {
+    stroke(1);
+    fill(250, 113, 255);
+    circle(position.x, position.y, size);
+  }
+  
+  void draw2() {
+    stroke(1);
+    fill(200, 0, 110);
+    circle(position.x, position.y, size);
+  }  
+  
   void draw() {
     stroke(1);
     fill(255);
@@ -66,6 +79,7 @@ class Ball {
   void hasHit(Player ps, Player pc) {
     if((position.x > ps.x - radius) && (position.x < ps.x + radius) && (position.y + radius > ps.y && position.y < ps.y + ps.y_off)) {
       velocity.x *= -1;
+      
     }
     
     if((position.x > pc.x - radius) && (position.x < pc.x + radius) && (position.y + radius > pc.y && position.y < pc.y + pc.y_off)) {

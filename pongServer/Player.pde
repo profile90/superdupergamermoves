@@ -24,10 +24,22 @@ class Player {
    
   }
   
- 
+
   void update(float y) {
     this.y = y;
     
+  }
+  
+  void draw3() {
+    strokeWeight(4);
+    stroke(250, 113, 255);
+    line(this.x, this.y, this.x, this.y + y_off);
+  }
+  
+  void draw2() {
+    strokeWeight(10);
+    stroke(101, 12, 45);
+    line(this.x, this.y, this.x, this.y + y_off);
   }
   
   void draw() {

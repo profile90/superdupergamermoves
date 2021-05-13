@@ -1,6 +1,6 @@
 import processing.net.*; 
-Player client_player;
-Player server_player;
+Player clientPlayer;
+Player serverPlayer;
 NetworkClient network;
 Ball ball;
 
@@ -13,8 +13,8 @@ void setup() {
   frameRate(30);
   network = new NetworkClient(new Client(this, "127.0.0.1", 10002));
 
-  client_player = new Player(true);
-  server_player = new Player(false);
+  clientPlayer = new Player(true);
+  serverPlayer = new Player(false);
   ball = new Ball();
 }
 
@@ -24,10 +24,38 @@ void clientEvent(Client client) {
 } 
 
 void draw() { 
-  background(0);
-  client_player.draw();
-  server_player.draw();
-  ball.draw();
-  client_player.update(mouseY);
+  
+  switch(network.state) {
+    case 1: // Axel
+      background(0, 0, 66);
+      clientPlayer.draw2();
+      serverPlayer.draw2();
+      ball.draw2();
+      break;
+    case 2: // Leo
+      background(22, 11, 0);
+      clientPlayer.draw3();
+      serverPlayer.draw3();
+      ball.draw3();
+      break;
+    case 0: // Samuel
+    default:
+      background(0);
+      clientPlayer.draw();
+      serverPlayer.draw();
+      ball.draw();
+      break;
+  }
+  
+  network.drawScore();
+  clientPlayer.update(mouseY);
   network.sendClientState();
 } 
+
+void keyPressed() {
+  
+  if(keyCode == ' ') {
+    network.nextState();
+  }
+  
+}

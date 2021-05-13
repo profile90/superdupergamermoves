@@ -25,7 +25,6 @@ void setup()
 }
 
 
-
 void draw()
 {
   
@@ -33,10 +32,29 @@ void draw()
   
   ball.hasHit(serverPlayer, clientPlayer);
   
-  background(0);
-  clientPlayer.draw();
-  serverPlayer.draw();
-  ball.draw();
+  
+  switch(network.state) {
+    case 0: // Samuel
+      background(0);
+      clientPlayer.draw();
+      serverPlayer.draw();
+      ball.draw();
+      break;
+    case 1: // Axel
+      background(22, 11, 0);
+      clientPlayer.draw2();
+      serverPlayer.draw2();
+      ball.draw2();
+      break;
+    case 2: // Leo
+      background(171, 219, 250);
+      clientPlayer.draw3();
+      serverPlayer.draw3();
+      ball.draw3();
+      break;
+  }
+  
+  network.drawScore();
   serverPlayer.update(mouseY);
 
 
@@ -44,4 +62,13 @@ void draw()
   network.sendServerState();
 
 
+}
+
+
+void keyPressed() {
+  
+  if(keyCode == ' ') {
+    network.nextState();
+  }
+  
 }
